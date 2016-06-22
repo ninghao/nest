@@ -1,7 +1,19 @@
 version: '2'
 services:
+  web:
+    image: nginx:1.11.1
+    ports:
+      - "8080:80"
+    depends_on:
+      - php
+    volumes_from:
+      - php
+    volumes:
+      - ./images/nginx/config:/etc/nginx/conf.d
   php:
     image: php:7.0-fpm
+    volumes:
+      - ./app:/mnt/app
   db:
     image: mariadb:10.1
     environment:

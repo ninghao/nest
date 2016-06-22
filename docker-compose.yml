@@ -1,1 +1,14 @@
 version: '2'
+  services:
+    db:
+      images: mariadb:10.1
+      environment:
+        MYSQL_ROOT_PASSWORD: "root"
+        MYSQL_DATABASE: "app"
+        MYSQL_USER: "app"
+        MYSQL_PASSWORD: "123123"
+      volumes:
+        - db:/var/lib/mysql
+  volumes:
+    db:
+      driver: local

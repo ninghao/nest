@@ -1,7 +1,7 @@
 version: '2'
 services:
   php:
-    images: php:7.0-fpm
+    image: php:7.0-fpm
   db:
     image: mariadb:10.1
     environment:

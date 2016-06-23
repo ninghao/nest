@@ -2,7 +2,7 @@ FROM php:7.0
 MAINTAINER wanghao <wanghao@ninghao.net>
 
 # 常用工具
-RUN apt-get update && apt-get install -y git curl \
+RUN apt-get update && apt-get install -y git curl libfreetype6-dev \
   && rm -rf /var/lib/apt/lists/* \
   && pecl install zip \
   && docker-php-ext-enable zip

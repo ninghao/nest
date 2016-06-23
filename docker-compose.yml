@@ -1,5 +1,12 @@
 version: '2'
 services:
+  console:
+    build:
+      context: ./images/console
+      dockerfile: Dockerfile
+    volumes_from:
+      - php
+    tty: true
   web:
     image: nginx:1.11.1
     ports:

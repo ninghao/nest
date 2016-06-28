@@ -20,3 +20,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
   && echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' >> ~/.bashrc \
   && . ~/.bashrc \
   && composer config -g repo.packagist composer https://packagist.phpcomposer.com
+
+# 安装管理 WordPress 项目的 wp-cli
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+  && chmod +x wp-cli.phar \
+  && mv wp-cli.phar /usr/local/bin/wp

@@ -5,7 +5,8 @@ MAINTAINER wanghao <wanghao@ninghao.net>
 RUN apt-get update && apt-get install -y git curl libfreetype6-dev \
   && rm -rf /var/lib/apt/lists/* \
   && pecl install zip \
-  && docker-php-ext-enable zip
+  && docker-php-ext-enable zip \
+  && docker-php-ext-install mysqli
 
 # 配置 git
 RUN git config --global user.name "wanghao8080" \

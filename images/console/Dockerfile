@@ -1,6 +1,8 @@
 FROM php:7.0
 MAINTAINER wanghao <wanghao@ninghao.net>
 
+WORKDIR /mnt/app
+
 # 常用工具
 RUN apt-get update && apt-get install -y git curl libfreetype6-dev \
   && rm -rf /var/lib/apt/lists/* \

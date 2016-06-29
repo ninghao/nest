@@ -26,3 +26,8 @@ RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' >> ~/.bashrc \
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
   && chmod +x wp-cli.phar \
   && mv wp-cli.phar /usr/local/bin/wp
+
+# 安装管理 Drupal 项目的 drush
+RUN php -r "readfile('http://files.drush.org/drush.phar');" > drush \
+  && chmod +x drush \
+  && mv drush /usr/local/bin

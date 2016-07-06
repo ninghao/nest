@@ -18,6 +18,7 @@ RUN git config --global user.name "wanghao8080" \
 # Composer 官方安装脚本 https://getcomposer.org/download/
 # 因为在国内下载 composer 太慢，我们直接把下载下来的 composer 复制到容器里使用。
 COPY ./composer-1.1.3.phar /usr/local/bin/composer
+RUN chmod +x /usr/local/bin/composer
 RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' >> ~/.bashrc \
   && . ~/.bashrc \
   && composer config -g repo.packagist composer https://packagist.phpcomposer.com

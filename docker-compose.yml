@@ -32,6 +32,10 @@ services:
       MYSQL_PASSWORD: "123123"
     volumes:
       - db:/var/lib/mysql
+  redis:
+    image: redis:3.2.1
+    ports:
+      - "6379:6379"
 volumes:
   db:
     driver: local

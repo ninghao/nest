@@ -2,7 +2,7 @@ version: '2'
 services:
   console:
     build:
-      context: ./images/console
+      context: ./services/console
       dockerfile: Dockerfile
     volumes_from:
       - php
@@ -16,10 +16,10 @@ services:
     volumes_from:
       - php
     volumes:
-      - ./images/nginx/config:/etc/nginx/conf.d
+      - ./services/nginx/config:/etc/nginx/conf.d
   php:
     build:
-      context: ./images/php
+      context: ./services/php
       dockerfile: Dockerfile
     volumes:
       - ./app:/mnt/app

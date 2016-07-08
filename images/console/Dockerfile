@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y git curl wget cron vim libfreetype6-dev
   && rm -rf /var/lib/apt/lists/* \
   && pecl install zip \
   && docker-php-ext-enable zip \
-  && docker-php-ext-install mysqli
+  && docker-php-ext-install mysqli pdo_mysql
 
 # 配置 git
 RUN git config --global user.name "wanghao8080" \

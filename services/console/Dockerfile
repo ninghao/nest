@@ -4,18 +4,21 @@ MAINTAINER wanghao <wanghao@ninghao.net>
 WORKDIR /mnt/app
 
 # 常用工具
-# glibc-common，重新安装一下支持的语言，因为我需要简体中文
-RUN apt-get update && apt-get install -y git curl wget cron vim libfreetype6-dev mariadb-client \
+RUN apt-get update && apt-get install -y git curl wget cron vim locales libfreetype6-dev mariadb-client \
   && rm -rf /var/lib/apt/lists/* \
-  && yum reinstall glibc-common -y \
   && pecl install zip \
   && docker-php-ext-enable zip \
   && docker-php-ext-install mysqli pdo_mysql
 
 # 把语言设置成简体中文
+RUN dpkg-reconfigure locales && \
+  locale-gen C.UTF-8 && \
+  /usr/sbin/update-locale LANG=C.UTF-8
+RUN echo 'zh_CN.UTF-8 UTF-8' >> /etc/locale.gen && \
+  locale-gen
+ENV LC_ALL C.UTF-8
 ENV LANG zh_CN.UTF-8
-ENV LC_ALL=zh_CN.UTF-8
-ENV LANGUAGE zh_CN:zh
+ENV LANGUAGE zh_CN.UTF-8
 
 # 配置 git
 RUN git config --global user.name "wanghao8080" \

@@ -36,6 +36,14 @@ services:
     image: redis:3.2.1
     ports:
       - "6379:6379"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: "db"
+      PMA_USER: "root"
+      PMA_PASSWORD: "root"
 volumes:
   db:
     driver: local

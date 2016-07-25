@@ -1,5 +1,15 @@
 > 使用 Docker 搭建本地的开发环境，是现在我推荐的方法 ：）
 
+## 服务列表
+db：使用 mariadb 作为应用的数据库
+php：解释 php 脚本，使用 php-fpm
+web：使用 NGINX 作为应用的 web 服务器
+console：常用工具
+redis：缓存
+phpmyadmin：管理数据库的 web 界面
+
+## 介绍与启动
+
 这是[宁皓网](http://ninghao.net) 介绍 Docker 相关技术用的小项目，可以作为本地的 PHP 应用的开发环境。先下载 docker for windows 或 docker for mac ，然后启动 docker 。再执行下面这些步骤：
 
 1 → 克隆仓库到本地

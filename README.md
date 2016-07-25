@@ -1,12 +1,12 @@
 > 使用 Docker 搭建本地的开发环境，是现在我推荐的方法 ：）
 
 ## 服务列表
-db：使用 mariadb 作为应用的数据库
-php：解释 php 脚本，使用 php-fpm
-web：使用 NGINX 作为应用的 web 服务器
-console：常用工具
-redis：缓存
-phpmyadmin：管理数据库的 web 界面
+- db：使用 mariadb 作为应用的数据库
+- php：解释 php 脚本，使用 php-fpm
+- web：使用 NGINX 作为应用的 web 服务器
+- console：常用工具
+- redis：缓存
+- phpmyadmin：管理数据库的 web 界面
 
 ## 介绍与启动
 

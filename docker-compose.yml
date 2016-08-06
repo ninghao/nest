@@ -14,15 +14,15 @@ services:
     depends_on:
       - php
     volumes_from:
-      - php
+      - unison
     volumes:
       - ./services/nginx/config:/etc/nginx/conf.d
   php:
     build:
       context: ./services/php
       dockerfile: Dockerfile
-    volumes:
-      - ./app:/mnt/app
+    volumes_from:
+      - unison
   db:
     image: mariadb:10.1
     environment:
@@ -44,6 +44,16 @@ services:
       PMA_HOST: "db"
       PMA_USER: "root"
       PMA_PASSWORD: "root"
+  unison:
+    image: onnimonni/unison:2.48.4
+    environment:
+      - UNISON_DIR=/mnt/app
+    ports:
+      - "5000:5000"
+    volumes:
+      - app:/mnt/app/
 volumes:
   db:
+    driver: local
+  app:
     driver: local

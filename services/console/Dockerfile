@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y git curl wget cron vim locales libfreet
   && docker-php-ext-enable zip \
   && docker-php-ext-install mysqli pdo_mysql
 
+RUN echo "PS1='[console]# '" >> /root/.bashrc
+
 # 把语言设置成简体中文
 RUN dpkg-reconfigure locales && \
   locale-gen C.UTF-8 && \

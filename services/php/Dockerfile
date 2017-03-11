@@ -2,6 +2,9 @@ FROM php:7.0-fpm
 MAINTAINER wanghao <wanghao@ninghao.net>
 
 ENV PHPREDIS_VERSION 3.0.0
+
+RUN mkdir -p /usr/src/php/ext
+
 RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
     && tar xfz /tmp/redis.tar.gz \
     && rm -r /tmp/redis.tar.gz \

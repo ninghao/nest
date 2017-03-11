@@ -10,6 +10,11 @@ RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$P
     && rm -r /tmp/redis.tar.gz \
     && mv phpredis-$PHPREDIS_VERSION /usr/src/php/ext/redis
 
+#更换debian源为阿里源
+RUN echo 'deb http://mirrors.aliyun.com/debian jessie main' > /etc/apt/sources.list \
+  && echo 'deb http://mirrors.aliyun.com/debian jessie-updates main' >> /etc/apt/sources.list \
+  && echo 'deb http://mirrors.aliyun.com/debian-security jessie/updates main' >> /etc/apt/sources.list
+
 RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev \
   && rm -rf /var/lib/apt/lists/* \
   && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \

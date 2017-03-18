@@ -3,6 +3,11 @@ MAINTAINER wanghao <wanghao@ninghao.net>
 
 WORKDIR /mnt/app
 
+#更换debian源为阿里源
+RUN echo 'deb http://mirrors.aliyun.com/debian jessie main' > /etc/apt/sources.list \
+  && echo 'deb http://mirrors.aliyun.com/debian jessie-updates main' >> /etc/apt/sources.list \
+  && echo 'deb http://mirrors.aliyun.com/debian-security jessie/updates main' >> /etc/apt/sources.list
+
 # 常用工具
 RUN apt-get update && apt-get install -y git curl wget cron vim locales libfreetype6-dev mariadb-client \
   && rm -rf /var/lib/apt/lists/* \

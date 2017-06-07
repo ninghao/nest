@@ -57,3 +57,4 @@ bower_components/
 
 # Project #
 app/database/
+.env

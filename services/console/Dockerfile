@@ -8,7 +8,14 @@ RUN apt-get update && apt-get install -y git curl wget cron vim locales libfreet
   && rm -rf /var/lib/apt/lists/* \
   && pecl install zip \
   && docker-php-ext-enable zip \
-  && docker-php-ext-install mysqli pdo_mysql
+  && docker-php-ext-install mysqli pdo_mysql gd bcmath
+
+ENV PHPREDIS_VERSION 3.0.0
+
+RUN mkdir -p /usr/src/php/ext/redis \
+    && curl -L https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
+    && echo 'redis' >> /usr/src/php-available-exts \
+    && docker-php-ext-install redis
 
 RUN echo "PS1='[console]# '" >> /root/.bashrc
 
@@ -23,13 +30,13 @@ ENV LANG zh_CN.UTF-8
 ENV LANGUAGE zh_CN.UTF-8
 
 # 配置 git
-RUN git config --global user.name "wanghao8080" \
-  && git config --global user.email "117663444@qq.com"
+# RUN git config --global user.name "wanghao8080" \
+#   && git config --global user.email "117663444@qq.com"
 
 # 安装与配置 composer
 # Composer 官方安装脚本 https://getcomposer.org/download/
 # 因为在国内下载 composer 太慢，我们直接把下载下来的 composer 复制到容器里使用。
-COPY ./composer-1.1.3.phar /usr/local/bin/composer
+COPY ./files/composer-1.1.3.phar /usr/local/bin/composer
 RUN chmod +x /usr/local/bin/composer
 RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' >> ~/.bashrc \
   && . ~/.bashrc \
@@ -44,3 +51,9 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 RUN php -r "readfile('http://files.drush.org/drush.phar');" > drush \
   && chmod +x drush \
   && mv drush /usr/local/bin
+
+# 安装管理 Drupal 项目的 Drupal Console
+RUN php -r "readfile('https://drupalconsole.com/installer');" > drupal \
+  && chmod +x drupal \
+  && mv drupal /usr/local/bin \
+  && drupal self-update

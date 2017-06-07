@@ -1,0 +1,40 @@
+version: '3'
+services:
+  console:
+    image: registry.cn-hangzhou.aliyuncs.com/ninghao/console
+    volumes:
+      - ninghao-unison-sync:/mnt/app/www:nocopy
+    tty: true
+  web:
+    image: registry.cn-hangzhou.aliyuncs.com/ninghao/nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - php
+    volumes:
+      - ninghao-unison-sync:/mnt/app/www:nocopy
+      - ./services/nginx/config:/etc/nginx/conf.d
+  php:
+    image: registry.cn-hangzhou.aliyuncs.com/ninghao/php
+    volumes:
+      - ninghao-unison-sync:/mnt/app/www:nocopy
+  db:
+    image: mariadb:10.1
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "app"
+      MYSQL_USER: "app"
+      MYSQL_PASSWORD: "123123"
+    volumes:
+      - ./app/database:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: "db"
+      PMA_USER: "app"
+      PMA_PASSWORD: "123123"
+volumes:
+  ninghao-unison-sync:
+    external: true

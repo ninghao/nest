@@ -1,0 +1,18 @@
+version: '2'
+options:
+  verbose: true
+  unison_image: 'eugenmayer/unison'
+  cli_mode: 'auto'
+  compose-file-path: 'docker-compose.yml'
+  compose-dev-file-path: 'docker-compose-dev.yml'
+syncs:
+  ninghao-unison-sync:
+    src: './app/www'
+    sync_prefer: 'default'
+    sync_userid: '33'
+    sync_strategy: 'unison'
+    sync_excludes: [
+      '.gitignore',
+      '.git/',
+      '.DS_Store',
+    ]
